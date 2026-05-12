@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { User } from '../types';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+
 interface AuthContextType {
   user: User | null;
   token: string | null;
@@ -35,7 +37,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   const login = async (username: string, password: string) => {
-    const response = await fetch('http://localhost:4000/auth/login', {
+    const response = await fetch(`${API_URL}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -62,7 +64,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   const register = async (username: string, password: string, role?: string, email?: string) => {
-    const response = await fetch('http://localhost:4000/auth/register', {
+    const response = await fetch(`${API_URL}/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
