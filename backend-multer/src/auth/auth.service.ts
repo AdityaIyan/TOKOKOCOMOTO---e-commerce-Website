@@ -39,6 +39,7 @@ export class AuthService {
   }
 
   async login(data: any) {
+    console.log("=== DEBUG INCOMING LOGIN DATA ===", data);
     const { username, password } = data;
     const user = await this.prisma.user.findUnique({ where: { username } });
     if (!user) {
